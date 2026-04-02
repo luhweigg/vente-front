@@ -2,8 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import Auth from './pages/Auth';
-import Market from './pages/Market';
+import AllItems from './pages/AllItems';
 import MyItems from './pages/MyItems';
+import Item from './pages/Item';
+import SellItem from './pages/SellItem';
 import Navbar from './components/layout/Navbar';
 
 function AppRoutes() {
@@ -23,8 +25,10 @@ function AppRoutes() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Market />} />
+        <Route path="/" element={<AllItems />} />
         <Route path="/mes-ventes" element={<MyItems />} />
+        <Route path="/vendre" element={<SellItem />} />
+        <Route path="/item/:id" element={<Item />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

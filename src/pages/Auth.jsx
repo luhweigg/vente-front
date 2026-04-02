@@ -15,7 +15,6 @@ export default function Auth() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    const endpoint = isLogin ? '/auth/login' : '/auth/register';
     
     try {
       const data = await api[isLogin ? 'login' : 'register']({ username, password });
@@ -34,19 +33,19 @@ export default function Auth() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', textAlign: 'center', background: 'white', padding: '30px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-      <h2>{isLogin ? 'Connexion' : 'Inscription'}</h2>
+    <div className='luxury-card' style={{ maxWidth: '400px', margin: '50px auto', textAlign: 'center', padding: '30px', borderRadius: '10px' }}>
+      <h2 style={{ color: '#c9a063' }}>{isLogin ? 'Connexion' : 'Inscription'}</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
-        <input type="text" placeholder="Nom d'utilisateur" value={username} onChange={(e) => setUsername(e.target.value)} required style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-        <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} />
-        <button type="submit" style={{ padding: '10px', background: '#3498db', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
+        <input className="luxury-input" type="text" placeholder="Nom d'utilisateur" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        <input className="luxury-input" type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <button className='btn-luxury' type="submit">
           {isLogin ? 'Se connecter' : "S'inscrire"}
         </button>
       </form>
       <p style={{ marginTop: '20px' }}>
         {isLogin ? "Pas encore de compte ?" : "Déjà un compte ?"}
-        <button onClick={() => setIsLogin(!isLogin)} style={{ marginLeft: '10px', background: 'none', border: 'none', color: '#3498db', textDecoration: 'underline', cursor: 'pointer' }}>
+        <button onClick={() => setIsLogin(!isLogin)} style={{ marginLeft: '10px', background: 'none', border: 'none', color: '#c9a063', textDecoration: 'none', cursor: 'pointer', fontWeight: 'bold' }}>
           {isLogin ? "Créer un compte" : "Se connecter"}
         </button>
       </p>

@@ -7,6 +7,9 @@ async function fetchAPI(endpoint, options = {}) {
   };
 
   const response = await fetch(`${API_URL}${endpoint}`, defaultOptions);
+  
+  if (response.status === 204) return null;
+  
   const data = await response.json();
 
   if (!response.ok) {
@@ -17,7 +20,6 @@ async function fetchAPI(endpoint, options = {}) {
 }
 
 export const api = {
-  
   login: (credentials) => fetchAPI('/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -30,7 +32,15 @@ export const api = {
     body: JSON.stringify(credentials)
   }),
 
-  getMarket: (search = '') => fetchAPI(`/item?search=${search}`),
+  checkAuth: () => fetchAPI('/auth/me'),
+
+  logout: () => fetchAPI('/auth/logout', {
+    method: 'POST'
+  }),
+
+  getAllItems: (search = '') => fetchAPI(`/item?search=${search}`),
+
+  getOneItem: (itemId) => fetchAPI(`/item/${itemId}`),
   
   getMyItems: () => fetchAPI('/item/me'),
   
